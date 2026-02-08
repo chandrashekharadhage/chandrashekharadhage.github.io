@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Profile Resume</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+}
+
+/* ===== PAGE BACKGROUND ===== */
+body {
+  margin: 0;
+  background: #f1f5f9; /* softer gray like screenshot */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  color: #111827;
+}
+
+/* ===== LAYOUT ===== */
+.wrapper {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 32px;
+  max-width: 1500px;
+  margin: 24px auto;
+  padding: 0 20px;
+}
+
+/* ===== LEFT PROFILE ===== */
+.profile {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 40px 26px; /* Increased top padding for screenshot feel */
+  box-shadow: 0 24px 48px rgba(0,0,0,.12);
+  text-align: center;
+}
+
+/* Container to hold avatar and the status dot */
+.avatar-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  width: 150px; /* Increased to match screenshot size */
+  height: 150px;
+  border-radius: 50%;
+  background: #d1d5db;
+  display: block;
+  object-fit: cover;
+}
+
+/* The small grey dot on the avatar */
+.status-dot {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  background-color: #94a3b8;
+  border: 3px solid #fff;
+  border-radius: 50%;
+}
+
+.profile h1 {
+  font-size: 32px; /* Larger bold name */
+  font-weight: 800;
+  margin: 10px 0 4px;
+  color: #0f172a;
+}
+
+.profile .job-title {
+  margin: 0 0 24px;
+  color: #64748b;
+  font-size: 18px;
+}
+
+.profile .summary {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-bottom: 30px;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile .info {
+  text-align: left;
+  display: inline-block; /* Centers the left-aligned block */
+  font-size: 15px;
+  line-height: 2.2; /* Better spacing for icons */
+  color: #374151;
+  margin-bottom: 30px;
+}
+
+/* Social Buttons (Black Circles) */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.social-btn {
+  width: 44px;
+  height: 44px;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+}
+
+/* ===== MAIN CARD ===== */
+.main {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 28px 32px 34px;
+  box-shadow: 0 24px 48px rgba(0,0,0,.12);
+}
+
+/* ===== TABS ===== */
+.tabs {
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.tab {
+  font-weight: 600;
+  padding-bottom: 12px;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.tab.active {
+  color: #2563eb;
+  border-bottom: 3px solid #2563eb;
+}
+
+/* ===== SECTIONS ===== */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ===== RESUME HEADER ===== */
+.resume-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.resume-actions h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.action-btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #c7d2fe;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.action-btn:hover {
+  background: #eef2ff;
+}
+
+/* ===== PDF VIEW ===== */
+.pdf-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 18px 0;
+}
+
+.pdf-frame {
+  width: 860px;
+  height: 1120px;
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0,0,0,.18);
+}
+
+.pdf-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1100px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .pdf-frame {
+    width: 100%;
+    height: 90vh;
+  }
+}
+.achievements-grid {
+  display: grid;
+  /* This forces exactly 2 columns */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 24px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.achievement-card {
+  display: flex;
+  align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid #e0e6ed;
+  border-radius: 12px;
+  padding: 24px;
+  /* Matching the subtle shadow from your image */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+/* Mobile Responsive: Switch to 1 column on small screens */
+@media (max-width: 768px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.achievement-card:hover {
+  transform: translateY(-5px);
+  border-color: #d1d9e6;
+}
+
+.card-icon {
+  font-size: 24px;
+  margin-right: 15px;
+  padding-top: 5px;
+}
+
+.achievement-card h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+  color: #1a2b4b;
+}
+
+.year {
+  color: #6c757d;
+  font-size: 0.85rem;
+  margin-right: 10px;
+}
+
+.tag {
+  background: #f0f4f8;
+  color: #5a6b89;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.achievement-card p {
+  margin-top: 10px;
+  color: #4a5568;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column; /* Forces one column */
+  gap: 20px;
+  max-width: 900px; /* Constrains width for better readability */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.experience-card {
+  background: #ffffff;
+  border: 1px solid #e0e6ed;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s;
+}
+
+.experience-card:hover {
+  border-color: #cbd5e1;
+}
+
+.job-info h3 {
+  margin: 0;
+  color: #1a2b4b;
+  font-size: 1.25rem;
+}
+
+.company-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.company-name {
+  font-weight: 600;
+  color: #334155;
+  font-size: 1.1rem;
+}
+
+.meta {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.experience-list {
+  margin: 15px 0 0 20px;
+  padding: 0;
+  color: #475569;
+}
+
+.experience-list li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+/* Reusing the tag style from achievements */
+.tag.professional {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+
+
+
+/* Container holds the relative positioning */
+.experience-container {
+  position: relative;
+  padding-left: 40px; /* Space for line and dots */
+  margin: 20px 0;
+}
+
+/* The Vertical Line - Created as a pseudo-element for better control */
+.experience-container::before {
+  content: "";
+  position: absolute;
+  left: 11px; /* Positions the line exactly behind the center of the dots */
+  top: 10px;
+  bottom: 20px; /* Stops before the end of the last item */
+  width: 2px;
+  background-color: #e0e0e0; /* Light gray line */
+  z-index: 1;
+}
+
+.job {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+/* The Generic Dot (Hollow Circle) */
+.job::before {
+  content: "";
+  position: absolute;
+  /* Centering the dot on the line: 
+     Dot is 16px wide + 4px border (total 24px). 
+     Half of that is 12px. Line is at 11px + 1px half-width. Perfect match. */
+  left: -40px; 
+  top: 0;
+  width: 16px;
+  height: 16px;
+  background-color: white; /* Hollow center */
+  border: 4px solid #ccc; /* Generic default border */
+  border-radius: 50%;
+  z-index: 2; /* Keeps dot above the line */
+}
+
+/* 10 Generic Colors for the Dots */
+.job:nth-child(1)::before { border-color: #00af66; } /* Tripadvisor Green */
+.job:nth-child(2)::before { border-color: #4285f4; } /* Google Blue */
+.job:nth-child(3)::before { border-color: #9b51e0; } /* ShareChat Purple */
+.job:nth-child(4)::before { border-color: #f44336; } /* Red */
+.job:nth-child(5)::before { border-color: #ff9800; } /* Orange */
+.job:nth-child(6)::before { border-color: #00bcd4; } /* Cyan */
+.job:nth-child(7)::before { border-color: #e91e63; } /* Pink */
+.job:nth-child(8)::before { border-color: #8bc34a; } /* Light Green */
+.job:nth-child(9)::before { border-color: #3f51b5; } /* Indigo */
+.job:nth-child(10)::before { border-color: #607d8b; } /* Blue Grey */
+
+/* Achievement Ribbon (The yellow bookmark icon in your screenshot) */
+.job.awarded::after {
+  content: "🔖"; /* Or use a FontAwesome icon if you have it */
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #ffc107;
+  font-size: 1.2rem;
+}
+
+/* Content Styling */
+.job h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #202124;
+}
+
+.company-badge {
+  display: inline-block;
+  background: #f1f3f4;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #5f6368;
+  margin: 8px 0;
+}
+
+.job-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 0.85rem;
+  color: #70757a;
+  margin-bottom: 12px;
+}
+
+.job-details {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.job-details li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+  color: #3c4043;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Increased gap slightly to match screenshot */
+  margin-top: 20px;
+}
+
+.social-btn {
+  width: 45px;
+  height: 45px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 20px; /* Adjust icon size here */
+  transition: all 0.3s ease;
+}
+
+/* Optional: Slight lift effect when hovering over logos */
+.social-btn:hover {
+  background-color: #333;
+  transform: translateY(-3px);
+}
+
+/* Ensure Font Awesome icons inherit white color */
+.social-btn i {
+  color: white;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- LEFT PROFILE -->
+<aside class="profile">
+  <div class="avatar-container">
+    <img src="profile.jpg" class="avatar" alt="Chandrashekhar Adhage">
+    <span class="status-dot"></span>
+  </div>
+
+  <h1>Chandrashekhar Adhage</h1>
+  <p class="job-title">Lead Software Engineer</p>
+
+  <p class="summary">
+    Software engineer with 10+ years of experience and a passion for AI and scalable systems—building products end-to-end, from idea to deployment. Ex-Barclays, IIT Bombay
+  </p>
+
+  <div class="info">
+    <div>✉️ cadhage44@gmail.com</div>
+    <div>📞 +91 9975015476</div>
+    <div>📍 India</div>
+  </div>
+
+<div class="social-links">
+  <a href="https://linkedin.com/in/cadhage" class="social-btn" aria-label="LinkedIn">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+  <a href="https://github.com/cadhage" class="social-btn" aria-label="GitHub">
+    <i class="fab fa-github"></i>
+  </a>
+  <a href="#" class="social-btn" aria-label="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+</div>
+</aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <div class="tabs">
+      <div class="tab active" onclick="openTab('resume', this)">Resume</div>
+      <div class="tab" onclick="openTab('projects', this)">Experience</div>
+      <div class="tab" onclick="openTab('achievements', this)">Achievements</div>
+    </div>
+
+    <!-- RESUME (PDF ONLY) -->
+    <section id="resume" class="section active">
+
+      <div class="resume-actions">
+        <h3>Resume</h3>
+        <div class="action-buttons">
+          <button class="action-btn" onclick="downloadPDF()">⬇ Download</button>
+          <button class="action-btn" onclick="copyPDF()">🔗 Copy Link</button>
+        </div>
+      </div>
+
+      <div class="pdf-wrapper">
+        <div class="pdf-frame">
+          <iframe
+            src="Chandrashekhar_Adhage.pdf#toolbar=0&navpanes=0&scrollbar=0">
+          </iframe>
+        </div>
+      </div>
+
+
+    </section>
+	
+
+   <section id="projects" class="section">
+  <div class="experience-container">
+    <div class="job">
+
+    <div class="job">
+      <h3>Lead Software Developer</h3>
+      <span class="company-badge">Nomura</span>
+      <div class="job-meta">
+        <span>📍 Mumbai, India</span>
+        <span>📅 Feb 2025 – Present</span>
+      </div>
+      <ul class="job-details">
+        <li>Architected in-house search infrastructure using <b>Elasticsearch on AWS</b>, reducing latency by <b>60%</b>, improving throughput by <b>3×</b>, and supporting <b>5M+</b> concurrent requests.</li>
+        <li>Engineered a high-performance <b>data importer</b> with custom caching, cutting latency by <b>50%</b> and achieving <b>100ms</b> response time at <b>10M requests/day</b>.</li>
+        <li>Built <b>Grafana dashboards</b> enabling early error detection, improving service uptime by <b>15%</b>.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <h3>Lead Developer</h3>
+      <span class="company-badge">Barclays</span>
+      <div class="job-meta">
+        <span>📍 Pune, India</span>
+        <span>📅 Oct 2022 – Feb 2025</span>
+      </div>
+      <ul class="job-details">
+        <li>Led development of high-performance <b>RESTful APIs</b> supporting <b>1.5M+</b> agents globally at enterprise scale.</li>
+        <li>Migrated <b>17+</b> critical services from <b>OpenShift to AWS</b>, improving availability by <b>35%</b> and reducing infrastructure costs by <b>25%</b>.</li>
+        <li>Designed and implemented <b>SSO & OAuth</b>, reducing login issues by <b>40%</b> and improving authentication speed by <b>30%</b>.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <h3>Lead Technology</h3>
+      <span class="company-badge">Standard Chartered Bank</span>
+      <div class="job-meta">
+        <span>📍 Bangalore, India</span>
+        <span>📅 Jul 2021 – Oct 2022</span>
+      </div>
+      <ul class="job-details">
+        <li>Led <b>frontend development</b> using <b>React</b>, improving load speed by <b>35%</b> and enhancing overall UI/UX.</li>
+        <li>Developed <b>microservices</b> to identify top 10 profitable customers, improving processing efficiency by <b>20×</b> for <b>50K+</b> daily transactions.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <h3>Software Engineer</h3>
+      <span class="company-badge">3FramesLab</span>
+      <div class="job-meta">
+        <span>📍 Bangalore, India</span>
+        <span>📅 Feb 2021 – Jun 2021</span>
+      </div>
+      <ul class="job-details">
+        <li>Architected a <b>gRPC-based adapter layer</b> connecting Kotlin/Java with Python services, improving interoperability across <b>6 modules</b> by <b>45%</b>.</li>
+        <li>Built an automated <b>WhatsApp reply system</b> using <b>Spring Boot</b> and <b>Gupshup API</b>, achieving <b>99%</b> delivery accuracy.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <h3>Software Engineer</h3>
+      <span class="company-badge">Advanced Risk Analytics Pvt. Ltd.</span>
+      <div class="job-meta">
+        <span>📍 Pune, India</span>
+        <span>📅 Jul 2018 – Sep 2020</span>
+      </div>
+      <ul class="job-details">
+        <li>Developed and released an <b>Android application</b> using <b>Java</b> and <b>SQL</b>, serving <b>2000+</b> active users.</li>
+        <li>Automated an enterprise <b>email response system</b> using <b>Java & Spring Boot</b>, improving collaboration for <b>2000+</b> users.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+    <section id="achievements" class="section">
+  <h2 class="section-title">Achievements & Awards</h2>
+  <p class="section-subtitle">Recognition for excellence in engineering and competitive programming</p>
+
+  <div class="achievements-grid">
+    <div class="achievement-card">
+      <div class="card-icon">🏆</div>
+      <div class="card-content">
+        <h3>Code Gladiator Finalist</h3>
+        <span class="year">2019, 2024</span> <span class="tag professional">Competitive</span>
+        <p>Finalist and Semifinalist among 50,000+ participants, demonstrating elite DS & Algorithm skills.</p>
+      </div>
+    </div>
+
+    <div class="achievement-card">
+      <div class="card-icon">🎓</div>
+      <div class="card-content">
+        <h3>GATE 2016 Excellence</h3>
+        <span class="year">2016</span> <span class="tag academic">Academic</span>
+        <p>Secured 96.7 percentile among 108,495 candidates, demonstrating exceptional analytical excellence.</p>
+      </div>
+    </div>
+
+    <div class="achievement-card">
+      <div class="card-icon">🏅</div>
+      <div class="card-content">
+        <h3>Google Code Jam Semifinalist</h3>
+        <span class="year">Global</span> <span class="tag competitive">Competitive</span>
+        <p>Ranked among the top performers globally out of 62,000+ participants.</p>
+      </div>
+    </div>
+
+    <div class="achievement-card">
+      <div class="card-icon">📈</div>
+      <div class="card-content">
+        <h3>Global Platform Rankings</h3>
+        <span class="year">Ongoing</span> <span class="tag competitive">Competitive</span>
+        <p>
+          <a href="https://leetcode.com/u/cadhage44/" target="_blank">LeetCode (Top 5%)</a>, 
+          <a href="https://www.hackerrank.com/profile/cadhage44" target="_blank">HackerRank (Top 1%)</a>, 
+          and HackerEarth (Top 2%).
+        </p>
+      </div>
+    </div>
+
+    <div class="achievement-card">
+      <div class="card-icon">💻</div>
+      <div class="card-content">
+        <h3>National Hackathons</h3>
+        <span class="year">Multiple</span> <span class="tag professional">Hackathons</span>
+        <p>Participant in high-stakes events including Honeywell CODE2HON, Axis AI, and TomTom Hack.</p>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+  </main>
+</div>
+
+<script>
+function openTab(id, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+const PDF_URL = `${window.location.origin}/Chandrashekhar_Adhage.pdf`;
+
+function downloadPDF() {
+  const a = document.createElement("a");
+  a.href = PDF_URL;
+  a.download = "Chandrashekhar_Adhage.pdf";
+  a.click();
+}
+
+function copyPDF() {
+  navigator.clipboard.writeText(PDF_URL)
+    .then(() => alert("Resume PDF link copied"));
+}
+</script>
+
+</body>
+</html>
