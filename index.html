@@ -3,509 +3,569 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Profile Resume</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<title>Chandrashekhar Adhage | Staff Systems Engineer</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* ===== RESET ===== */
+/* ===== DESIGN SYSTEM (MAINFRAME DARK MODE) ===== */
 * {
   box-sizing: border-box;
-}
-
-/* ===== PAGE BACKGROUND ===== */
-body {
   margin: 0;
-  background: #f1f5f9; /* softer gray like screenshot */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont;
-  color: #111827;
+  padding: 0;
 }
 
-/* ===== LAYOUT ===== */
+body {
+  background: #0b0f19;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #e2e8f0;
+  line-height: 1.5;
+  padding: 40px 20px;
+}
+
 .wrapper {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 360px 1fr;
   gap: 32px;
-  max-width: 1500px;
-  margin: 24px auto;
-  padding: 0 20px;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
-/* ===== LEFT PROFILE ===== */
+/* ===== ACCENTS & NEOMORPHIC SHADOWS ===== */
+.card-glow {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== LEFT PROFILE SIDEBAR ===== */
 .profile {
-  background: #ffffff;
-  border-radius: 22px;
-  padding: 40px 26px; /* Increased top padding for screenshot feel */
-  box-shadow: 0 24px 48px rgba(0,0,0,.12);
-  text-align: center;
+  padding: 40px 30px;
+  height: fit-content;
+  position: sticky;
+  top: 40px;
 }
 
-/* Container to hold avatar and the status dot */
 .avatar-container {
   position: relative;
   display: inline-block;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
 }
 
 .avatar {
-  width: 150px; /* Increased to match screenshot size */
-  height: 150px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  background: #d1d5db;
-  display: block;
+  background: #1f2937;
+  border: 3px solid #3b82f6;
+  padding: 4px;
   object-fit: cover;
+  
+  /* ===== PROFESSIONAL TECH FILTER MATRIX ===== */
+  filter: grayscale(100%) brightness(90%) contrast(115%);
+  mix-blend-mode: luminosity;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* The small grey dot on the avatar */
+/* Smooth color wake-up on recruiter hover */
+.avatar-container:hover .avatar {
+  filter: grayscale(0%) brightness(100%) contrast(100%);
+  mix-blend-mode: normal;
+  border-color: #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
 .status-dot {
   position: absolute;
   bottom: 8px;
   right: 8px;
   width: 16px;
   height: 16px;
-  background-color: #94a3b8;
-  border: 3px solid #fff;
+  background-color: #10b981;
+  border: 3px solid #111827;
   border-radius: 50%;
+  box-shadow: 0 0 12px #10b981;
+  transition: all 0.4s ease;
+}
+
+.avatar-container:hover .status-dot {
+  box-shadow: 0 0 25px #10b981;
+  transform: scale(1.1);
 }
 
 .profile h1 {
-  font-size: 32px; /* Larger bold name */
+  font-size: 26px;
   font-weight: 800;
-  margin: 10px 0 4px;
-  color: #0f172a;
+  color: #fff;
+  text-align: center;
+  letter-spacing: -0.5px;
 }
 
 .profile .job-title {
-  margin: 0 0 24px;
-  color: #64748b;
-  font-size: 18px;
+  color: #3b82f6;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 6px 0 20px;
 }
 
 .profile .summary {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
-  color: #4b5563;
-  margin-bottom: 30px;
-  max-width: 340px;
-  margin-left: auto;
-  margin-right: auto;
+  color: #9ca3af;
+  margin-bottom: 24px;
+  text-align: justify;
 }
 
 .profile .info {
-  text-align: left;
-  display: inline-block; /* Centers the left-aligned block */
-  font-size: 15px;
-  line-height: 2.2; /* Better spacing for icons */
-  color: #374151;
-  margin-bottom: 30px;
+  font-size: 14px;
+  color: #cbd5e1;
+  border-top: 1px solid #1f2937;
+  padding-top: 20px;
 }
 
-/* Social Buttons (Black Circles) */
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.info-item i {
+  color: #3b82f6;
+  width: 16px;
+}
+
 .social-links {
   display: flex;
   justify-content: center;
   gap: 12px;
+  margin-top: 24px;
 }
 
 .social-btn {
-  width: 44px;
-  height: 44px;
-  background: #000;
-  color: #fff;
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: #1f2937;
+  color: #9ca3af;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  font-size: 18px;
-  transition: transform 0.2s;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  border: 1px solid #374151;
 }
 
 .social-btn:hover {
-  transform: translateY(-3px);
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
 }
 
-/* ===== MAIN CARD ===== */
+/* ===== MAIN WORKSPACE ===== */
 .main {
-  background: #ffffff;
-  border-radius: 22px;
-  padding: 28px 32px 34px;
-  box-shadow: 0 24px 48px rgba(0,0,0,.12);
+  padding: 40px;
 }
 
-/* ===== TABS ===== */
+/* ===== NAVIGATION TABS ===== */
 .tabs {
   display: flex;
-  gap: 32px;
-  border-bottom: 1px solid #e5e7eb;
-  margin-bottom: 24px;
+  gap: 8px;
+  background: #1f2937;
+  padding: 6px;
+  border-radius: 10px;
+  margin-bottom: 32px;
+  width: fit-content;
 }
 
 .tab {
   font-weight: 600;
-  padding-bottom: 12px;
+  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
-  color: #6b7280;
-  font-size: 15px;
+  color: #9ca3af;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  color: #fff;
 }
 
 .tab.active {
-  color: #2563eb;
-  border-bottom: 3px solid #2563eb;
+  color: #fff;
+  background: #3b82f6;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
 }
 
-/* ===== SECTIONS ===== */
+/* ===== WORKSPACE SECTIONS ===== */
 .section { display: none; }
 .section.active { display: block; }
 
-/* ===== RESUME HEADER ===== */
+.section-header {
+  margin-bottom: 28px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* ===== METRICS METADATA BLOCK ===== */
+.metrics-dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.metric-card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: left;
+}
+
+.metric-val {
+  font-size: 24px;
+  font-weight: 800;
+  color: #3b82f6;
+}
+
+.metric-lbl {
+  font-size: 12px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ===== ACTIONS ===== */
 .resume-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
-}
-
-.resume-actions h3 {
-  margin: 0;
-  font-size: 20px;
-  color: #2563eb;
-  font-weight: 700;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .action-btn {
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: 1px solid #c7d2fe;
-  background: #ffffff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid #3b82f6;
+  background: transparent;
   cursor: pointer;
   font-size: 14px;
-  color: #2563eb;
-  font-weight: 500;
+  color: #3b82f6;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .action-btn:hover {
-  background: #eef2ff;
+  background: #3b82f6;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
 }
 
-/* ===== PDF VIEW ===== */
-/* ===== UPDATED PDF VIEW ===== */
+/* ===== INLINE RESUME METADATA VIEWER ===== */
 .pdf-wrapper {
-  display: flex;
-  justify-content: center;
-  padding: 10px 0;
-  background: #ffffff; /* Ensures the wrapper itself is white */
+  background: #1f2937;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid #374151;
 }
 
 .pdf-frame {
   width: 100%;
-  max-width: 850px;
-  /* Standard A4 aspect ratio to prevent extra vertical black space */
-  aspect-ratio: 1 / 1.414; 
-  background: #ffffff;
-  border-radius: 4px;
+  aspect-ratio: 1 / 1.414;
+  border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  border: 1px solid #e2e8f0;
 }
 
 .pdf-frame iframe {
   width: 100%;
   height: 100%;
   border: none;
-  display: block;
-  /* This filter targets the grey/black background of the browser's 
-     default PDF viewer and pushes it toward white */
-  filter: brightness(1.02) contrast(1.05); 
-  background-color: #ffffff;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1100px) {
-  .wrapper {
-    grid-template-columns: 1fr;
-  }
-
-  .pdf-frame {
-    width: 100%;
-    height: 90vh;
-  }
-}
-.achievements-grid {
-  display: grid;
-  /* This forces exactly 2 columns */
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 24px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.achievement-card {
-  display: flex;
-  align-items: flex-start;
-  background: #ffffff;
-  border: 1px solid #e0e6ed;
-  border-radius: 12px;
-  padding: 24px;
-  /* Matching the subtle shadow from your image */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-}
-
-/* Mobile Responsive: Switch to 1 column on small screens */
-@media (max-width: 768px) {
-  .achievements-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.achievement-card:hover {
-  transform: translateY(-5px);
-  border-color: #d1d9e6;
-}
-
-.card-icon {
-  font-size: 24px;
-  margin-right: 15px;
-  padding-top: 5px;
-}
-
-.achievement-card h3 {
-  margin: 0 0 5px 0;
-  font-size: 1.1rem;
-  color: #1a2b4b;
-}
-
-.year {
-  color: #6c757d;
-  font-size: 0.85rem;
-  margin-right: 10px;
-}
-
-.tag {
-  background: #f0f4f8;
-  color: #5a6b89;
-  font-size: 0.75rem;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.achievement-card p {
-  margin-top: 10px;
-  color: #4a5568;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-.projects-container {
-  display: flex;
-  flex-direction: column; /* Forces one column */
-  gap: 20px;
-  max-width: 900px; /* Constrains width for better readability */
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.experience-card {
-  background: #ffffff;
-  border: 1px solid #e0e6ed;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-  transition: border-color 0.2s;
-}
-
-.experience-card:hover {
-  border-color: #cbd5e1;
-}
-
-.job-info h3 {
-  margin: 0;
-  color: #1a2b4b;
-  font-size: 1.25rem;
-}
-
-.company-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 4px 0;
-}
-
-.company-name {
-  font-weight: 600;
-  color: #334155;
-  font-size: 1.1rem;
-}
-
-.meta {
-  color: #64748b;
-  font-size: 0.9rem;
-  margin-bottom: 12px;
-}
-
-.experience-list {
-  margin: 15px 0 0 20px;
-  padding: 0;
-  color: #475569;
-}
-
-.experience-list li {
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-
-/* Reusing the tag style from achievements */
-.tag.professional {
-  background: #e0f2fe;
-  color: #0369a1;
-  font-size: 0.75rem;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-
-
-
-/* Container holds the relative positioning */
-.experience-container {
+/* ===== SYSTEMS TIMELINE LAYER ===== */
+.timeline {
   position: relative;
-  padding-left: 40px; /* Space for line and dots */
-  margin: 20px 0;
+  padding-left: 32px;
 }
 
-/* The Vertical Line - Created as a pseudo-element for better control */
-.experience-container::before {
+.timeline::before {
   content: "";
   position: absolute;
-  left: 11px; /* Positions the line exactly behind the center of the dots */
-  top: 10px;
-  bottom: 20px; /* Stops before the end of the last item */
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
   width: 2px;
-  background-color: #e0e0e0; /* Light gray line */
-  z-index: 1;
+  background: #1f2937;
 }
 
-.job {
+.timeline-node {
   position: relative;
   margin-bottom: 40px;
 }
 
-/* The Generic Dot (Hollow Circle) */
-.job::before {
+.timeline-node::before {
   content: "";
   position: absolute;
-  /* Centering the dot on the line: 
-     Dot is 16px wide + 4px border (total 24px). 
-     Half of that is 12px. Line is at 11px + 1px half-width. Perfect match. */
-  left: -40px; 
-  top: 0;
-  width: 16px;
-  height: 16px;
-  background-color: white; /* Hollow center */
-  border: 4px solid #ccc; /* Generic default border */
+  left: -32px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  background: #0b0f19;
+  border: 3px solid #3b82f6;
   border-radius: 50%;
-  z-index: 2; /* Keeps dot above the line */
+  z-index: 2;
 }
 
-/* 10 Generic Colors for the Dots */
-.job:nth-child(1)::before { border-color: #00af66; } /* Tripadvisor Green */
-.job:nth-child(2)::before { border-color: #4285f4; } /* Google Blue */
-.job:nth-child(3)::before { border-color: #9b51e0; } /* ShareChat Purple */
-.job:nth-child(4)::before { border-color: #f44336; } /* Red */
-.job:nth-child(5)::before { border-color: #ff9800; } /* Orange */
-.job:nth-child(6)::before { border-color: #00bcd4; } /* Cyan */
-.job:nth-child(7)::before { border-color: #e91e63; } /* Pink */
-.job:nth-child(8)::before { border-color: #8bc34a; } /* Light Green */
-.job:nth-child(9)::before { border-color: #3f51b5; } /* Indigo */
-.job:nth-child(10)::before { border-color: #607d8b; } /* Blue Grey */
-
-/* Achievement Ribbon (The yellow bookmark icon in your screenshot) */
-.job.awarded::after {
-  content: "🔖"; /* Or use a FontAwesome icon if you have it */
-  position: absolute;
-  right: 0;
-  top: 0;
-  color: #ffc107;
-  font-size: 1.2rem;
-}
-
-/* Content Styling */
-.job h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #202124;
-}
-
-.company-badge {
-  display: inline-block;
-  background: #f1f3f4;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #5f6368;
-  margin: 8px 0;
-}
-
-.job-meta {
+.node-header {
   display: flex;
-  gap: 15px;
-  font-size: 0.85rem;
-  color: #70757a;
-  margin-bottom: 12px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.job-details {
-  padding-left: 20px;
-  margin: 0;
+.node-title-group h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
 }
 
-.job-details li {
+.company-tag {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.node-meta {
+  text-align: right;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.node-meta div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.node-details {
+  margin: 16px 0 0 16px;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.node-details li {
   margin-bottom: 8px;
   line-height: 1.6;
-  color: #3c4043;
 }
 
-.social-links {
+.node-details b {
+  color: #e2e8f0;
+}
+
+/* ===== EDUCATION CARD MATRIX ===== */
+.education-matrix {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.edu-card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 24px;
   display: flex;
-  justify-content: center;
-  gap: 15px; /* Increased gap slightly to match screenshot */
-  margin-top: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: all 0.2s ease;
 }
 
-.social-btn {
-  width: 45px;
-  height: 45px;
-  background-color: #000;
-  color: #fff;
-  border-radius: 50%;
+.edu-card:hover {
+  border-color: #3b82f6;
+}
+
+.edu-main {
+  display: flex;
+  gap: 16px;
+}
+
+.edu-icon {
+  font-size: 24px;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  font-size: 20px; /* Adjust icon size here */
-  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
-/* Optional: Slight lift effect when hovering over logos */
-.social-btn:hover {
-  background-color: #333;
-  transform: translateY(-3px);
+.edu-body h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
 }
 
-/* Ensure Font Awesome icons inherit white color */
-.social-btn i {
-  color: white;
+.edu-institution {
+  color: #3b82f6;
+  font-weight: 600;
+  font-size: 15px;
+  margin: 2px 0 8px;
 }
 
+.edu-details {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 6px;
+}
 
+.edu-details span {
+  display: inline-block;
+  background: #1f2937;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #cbd5e1;
+  margin-right: 6px;
+  font-weight: 500;
+}
+
+.edu-timeline {
+  text-align: right;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* ===== ALGORITHMIC ACHIEVEMENTS GRID ===== */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.achieve-card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.achieve-card:hover {
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+}
+
+.achieve-icon {
+  font-size: 24px;
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.achieve-body h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.achieve-tags {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0 10px;
+}
+
+.mini-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.mini-tag.red { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+.mini-tag.green { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+
+.achieve-body p {
+  font-size: 13px;
+  color: #9ca3af;
+  line-height: 1.5;
+}
+
+/* ===== RESPONSIVE DISPATCHER ===== */
+@media (max-width: 1024px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+  .profile {
+    position: relative;
+    top: 0;
+  }
+  .metrics-dashboard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .metrics-dashboard {
+    grid-template-columns: 1fr;
+  }
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+  .edu-card {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .edu-timeline {
+    text-align: left;
+    margin-left: 64px;
+  }
+  .node-meta {
+    text-align: left;
+  }
+  .node-meta div {
+    justify-content: flex-start;
+  }
+}
 </style>
 </head>
 
@@ -513,224 +573,309 @@ body {
 
 <div class="wrapper">
 
-  <!-- LEFT PROFILE -->
-<aside class="profile">
-  <div class="avatar-container">
-    <img src="profile.jpg" class="avatar" alt="Chandrashekhar Adhage">
-    <span class="status-dot"></span>
-  </div>
-
-  <h1>Chandrashekhar Adhage</h1>
-  <p class="job-title">Lead Software Engineer</p>
-
-  <p class="summary">
-  Staff-level Software Engineer with 10+ years of experience designing and scaling cloud-native, distributed systems. Technical leader in Java, Spring Boot, AWS, and microservices, driving architecture, performance, and engineering excellence. Nomura | Ex-Barclays, IIT Bombay.  </p>
-  <div class="info">
-    <div>✉️ cadhage44@gmail.com</div>
-    <div>📞 +91 9975015476</div>
-    <div>📍 India</div>
-  </div>
-
-<div class="social-links">
-  <a href="https://linkedin.com/in/cadhage" class="social-btn" aria-label="LinkedIn">
-    <i class="fab fa-linkedin-in"></i>
-  </a>
-  <a href="https://github.com/cadhage" class="social-btn" aria-label="GitHub">
-    <i class="fab fa-github"></i>
-  </a>
-  <a href="#" class="social-btn" aria-label="Twitter">
-    <i class="fab fa-twitter"></i>
-  </a>
-</div>
-</aside>
-
-  <!-- MAIN -->
-  <main class="main">
-
-    <div class="tabs">
-      <div class="tab active" onclick="openTab('resume', this)">Resume</div>
-      <div class="tab" onclick="openTab('projects', this)">Experience</div>
-      <div class="tab" onclick="openTab('achievements', this)">Achievements</div>
+  <!-- LEFT COLUMN: SYSTEM OWNER PROFILE -->
+  <aside class="profile card-glow">
+    <div class="avatar-container">
+      <img src="profile.jpg" class="avatar" alt="Chandrashekhar Adhage">
+      <span class="status-dot"></span>
     </div>
 
-    <!-- RESUME (PDF ONLY) -->
-    <section id="resume" class="section active">
+    <h1>Chandrashekhar Adhage</h1>
+    <p class="job-title">Staff Systems Engineer</p>
 
+    <p class="summary">
+      Staff-level Software Engineer specializing in low-latency infrastructure execution, real-time distributed processing streams, and scalable microservice layers. Proven track record managing cloud migrations and system availability metrics across complex multi-tenant enterprise domains.
+    </p>
+
+    <div class="info">
+      <div class="info-item">
+        <i class="fas fa-envelope"></i>
+        <span>cadhage44@gmail.com</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <span>+91 9975015476</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Mumbai, India</span>
+      </div>
+    </div>
+
+    <div class="social-links">
+      <a href="https://linkedin.com/in/cadhage" target="_blank" class="social-btn" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://github.com/cadhage" target="_blank" class="social-btn" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://leetcode.com/u/cadhage44/" target="_blank" class="social-btn" aria-label="LeetCode">
+        <i class="fas fa-code"></i>
+      </a>
+    </div>
+  </aside>
+
+  <!-- RIGHT COLUMN: CORE WORKSPACE ENGINE -->
+  <main class="main card-glow">
+
+    <!-- NAVIGATION CONSOLE -->
+    <div class="tabs">
+      <div class="tab active" onclick="switchConsole('resume', this)">System Blueprint</div>
+      <div class="tab" onclick="switchConsole('experience', this)">Production Footprint</div>
+      <div class="tab" onclick="switchConsole('education', this)">Academic Pedigree</div>
+      <div class="tab" onclick="switchConsole('achievements', this)">Algorithmic Optimization</div>
+    </div>
+
+    <!-- TAB 1: RESUME BLUEPRINT -->
+    <section id="resume" class="section active">
       <div class="resume-actions">
-        <h3>Resume</h3>
+        <div class="section-header">
+          <h2 class="section-title">Technical Architecture Blueprint</h2>
+		  <p class="section-subtitle">Verified production snapshot of engineering execution, system architectures, and core competencies.</p>        </div>
         <div class="action-buttons">
-          <button class="action-btn" onclick="downloadPDF()">⬇ Download</button>
-          <button class="action-btn" onclick="copyPDF()">🔗 Copy Link</button>
+          <button class="action-btn" onclick="downloadPDF()"><i class="fas fa-download"></i> Fetch Document</button>
         </div>
       </div>
 
       <div class="pdf-wrapper">
         <div class="pdf-frame">
-          <iframe
-            src="Chandrashekhar_Adhage.pdf#toolbar=0&navpanes=0&scrollbar=0">
-          </iframe>
+          <iframe src="Chandrashekhar_Adhage.pdf#toolbar=0&navpanes=0&scrollbar=0"></iframe>
         </div>
       </div>
-
-
     </section>
 	
-
-   <section id="projects" class="section">
-  <div class="experience-container">
-    <div class="job">
-
-    <div class="job">
-      <h3>Lead Software Developer</h3>
-      <span class="company-badge">Nomura</span>
-      <div class="job-meta">
-        <span>📍 Mumbai, India</span>
-        <span>📅 Feb 2025 – Present</span>
+    <!-- TAB 2: SYSTEM EXPERIENCES -->
+    <section id="experience" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Production System Matrix</h2>
+        <p class="section-subtitle">Chronological catalog of end-to-end design, execution layers, and service lifecycles.</p>
       </div>
-      <ul class="job-details">
-        <li>Architected in-house search infrastructure using <b>Elasticsearch on AWS</b>, reducing latency by <b>60%</b>, improving throughput by <b>3×</b>, and supporting <b>5M+</b> concurrent requests.</li>
-        <li>Engineered a high-performance <b>data importer</b> with custom caching, cutting latency by <b>50%</b> and achieving <b>100ms</b> response time at <b>10M requests/day</b>.</li>
-        <li>Built <b>Grafana dashboards</b> enabling early error detection, improving service uptime by <b>15%</b>.</li>
-      </ul>
-    </div>
 
-    <div class="job">
-      <h3>Lead Developer</h3>
-      <span class="company-badge">Barclays</span>
-      <div class="job-meta">
-        <span>📍 Pune, India</span>
-        <span>📅 Oct 2022 – Feb 2025</span>
+      <!-- SYSTEM METRICS METADATA BLOCK -->
+      <div class="metrics-dashboard">
+        <div class="metric-card">
+          <div class="metric-val">50M+</div>
+          <div class="metric-lbl">Daily Ops Latency Load</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">&lt;100ms</div>
+          <div class="metric-lbl">Execution Loop Target</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">29</div>
+          <div class="metric-lbl">Microservices Migrated</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">40%</div>
+          <div class="metric-lbl">Db Overhead Reduction</div>
+        </div>
       </div>
-      <ul class="job-details">
-        <li>Led development of high-performance <b>RESTful APIs</b> supporting <b>1.5M+</b> agents globally at enterprise scale.</li>
-        <li>Migrated <b>17+</b> critical services from <b>OpenShift to AWS</b>, improving availability by <b>35%</b> and reducing infrastructure costs by <b>25%</b>.</li>
-        <li>Designed and implemented <b>SSO & OAuth</b>, reducing login issues by <b>40%</b> and improving authentication speed by <b>30%</b>.</li>
-      </ul>
-    </div>
+      
+      <div class="timeline">
+        
+        <div class="timeline-node">
+          <div class="node-header">
+            <div class="node-title-group">
+              <h3>Lead / Staff Software Developer</h3>
+              <span class="company-tag">Nomura</span>
+            </div>
+            <div class="node-meta">
+              <div><i class="fas fa-map-marker-alt"></i> Mumbai, India</div>
+              <div><i class="fas fa-calendar-alt"></i> Feb 2025 – Present</div>
+            </div>
+          </div>
+          <ul class="node-details">
+            <li>Architected high-throughput event-driven transaction pipelines handling <b>50M+ daily operations</b> within rigid <b>sub-100ms processing thresholds</b>, restructuring interface paths to safeguard transaction execution loops.</li>
+            <li>Orchestrated zero-downtime microservices cloud evolution targets for <b>12 internal applications</b>, accelerating development delivery targets by <b>3×</b> via sandboxed domain pipelines.</li>
+            <li>Designed enterprise multi-tenant system data caching infrastructure across 10+ active clusters, securing a <b>40% decrease in database load</b> and a <b>60% drop in networking serialization friction</b>.</li>
+            <li>Engineered low-level ingestion engine architectures parsing over <b>10M+ heavy data units daily</b> via isolated multithreaded processing loops, maximizing system resource limits and eliminating data constraints.</li>
+            <li>Founded the regional Architecture Review Board, leading governance metrics and providing strategic engineering mentorship across <b>8+ Senior Developers</b>.</li>
+          </ul>
+        </div>
 
-    <div class="job">
-      <h3>Lead Technology</h3>
-      <span class="company-badge">Standard Chartered Bank</span>
-      <div class="job-meta">
-        <span>📍 Bangalore, India</span>
-        <span>📅 Jul 2021 – Oct 2022</span>
+        <div class="timeline-node">
+          <div class="node-header">
+            <div class="node-title-group">
+              <h3>Lead Developer</h3>
+              <span class="company-tag">Barclays</span>
+            </div>
+            <div class="node-meta">
+              <div><i class="fas fa-map-marker-alt"></i> Pune, India</div>
+              <div><i class="fas fa-calendar-alt"></i> Oct 2022 – Feb 2025</div>
+            </div>
+          </div>
+          <ul class="node-details">
+            <li>Directed global cloud migration paths for <b>17 runtime microservices</b> from legacy container spaces, building resilient active-active clustering zones to elevate platform continuity metrics by <b>35%</b>.</li>
+            <li>Designed high-performance distributed token validation architectures for global identity access control systems, driving a <b>40% reduction in cross-service edge authentication exceptions</b>.</li>
+            <li>Re-engineered auto-scaling cluster structures to scale responsively under dynamic compute constraints, effectively limiting operational cloud billing overheads under fluctuating load patterns.</li>
+            <li>Instituted algorithmic CI/CD continuous deployment test fixtures, reducing deployment production defect regressions and setting robust delivery metrics.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-node">
+          <div class="node-header">
+            <div class="node-title-group">
+              <h3>Lead Technology</h3>
+              <span class="company-tag">Standard Chartered Bank (via Synechron)</span>
+            </div>
+            <div class="node-meta">
+              <div><i class="fas fa-map-marker-alt"></i> Bangalore, India</div>
+              <div><i class="fas fa-calendar-alt"></i> Jul 2021 – Oct 2022</div>
+            </div>
+          </div>
+          <ul class="node-details">
+            <li>Designed high-throughput streaming architecture blocks ingest-tuning <b>30M+ daily system inputs</b>, achieving a verified <b>20× increase in overall pipeline stream capacity</b>.</li>
+            <li>Decoupled system interface endpoints and organized modular service boundaries to remove complex structural debt across parallel development pods.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-node">
+          <div class="node-header">
+            <div class="node-title-group">
+              <h3>Software Engineer</h3>
+              <span class="company-tag">3FramesLab</span>
+            </div>
+            <div class="node-meta">
+              <div><i class="fas fa-map-marker-alt"></i> Bangalore, India</div>
+              <div><i class="fas fa-calendar-alt"></i> Feb 2021 – Jun 2021</div>
+            </div>
+          </div>
+          <ul class="node-details">
+            <li>Built a low-latency <b>gRPC-over-HTTP/2</b> asynchronous communication layer, boosting baseline data module connectivity metrics by <b>45%</b>.</li>
+            <li>Designed low-overhead internal concurrent thread execution workers to isolate heavy network data burst profiles without memory leaks.</li>
+          </ul>
+        </div>
+
       </div>
-      <ul class="job-details">
-        <li>Led <b>frontend development</b> using <b>React</b>, improving load speed by <b>35%</b> and enhancing overall UI/UX.</li>
-        <li>Developed <b>microservices</b> to identify top 10 profitable customers, improving processing efficiency by <b>20×</b> for <b>50K+</b> daily transactions.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="job">
-      <h3>Software Engineer</h3>
-      <span class="company-badge">3FramesLab</span>
-      <div class="job-meta">
-        <span>📍 Bangalore, India</span>
-        <span>📅 Feb 2021 – Jun 2021</span>
+    <!-- TAB 3: ACADEMIC PEDIGREE -->
+    <section id="education" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Academic Architecture Foundations</h2>
+        <p class="section-subtitle">Formal structural knowledge baselines and computational theory focus fields.</p>
       </div>
-      <ul class="job-details">
-        <li>Architected a <b>gRPC-based adapter layer</b> connecting Kotlin/Java with Python services, improving interoperability across <b>6 modules</b> by <b>45%</b>.</li>
-        <li>Built an automated <b>WhatsApp reply system</b> using <b>Spring Boot</b> and <b>Gupshup API</b>, achieving <b>99%</b> delivery accuracy.</li>
-      </ul>
-    </div>
 
-    <div class="job">
-      <h3>Software Engineer</h3>
-      <span class="company-badge">Advanced Risk Analytics Pvt. Ltd.</span>
-      <div class="job-meta">
-        <span>📍 Pune, India</span>
-        <span>📅 Jul 2018 – Sep 2020</span>
+      <div class="education-matrix">
+        
+        <!-- MASTER DEGREE -->
+        <div class="edu-card">
+          <div class="edu-main">
+            <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="edu-body">
+              <h3>Master of Technology (M.Tech.)</h3>
+              <p class="edu-institution">Indian Institute of Technology, Bombay</p>
+              <p>Advanced research track focused on parallel processing architectures, distributed systems optimization, high-throughput data pipelines, and large-scale algorithmic complexity modeling.</p>
+              <div class="edu-details">
+                <span>Core Focus</span> Distributed Compute Systems • Geospatial Scale Algorithms
+              </div>
+            </div>
+          </div>
+          <div class="edu-timeline">
+            <div><i class="fas fa-calendar-alt"></i> 2016 – 2018</div>
+            <div style="margin-top: 4px; color: #10b981; font-weight: 600;"><i class="fas fa-award"></i> Teaching Assistantship</div>
+          </div>
+        </div>
+
+        <!-- BACHELOR DEGREE PLACEHOLDER -->
+        <div class="edu-card">
+          <div class="edu-main">
+            <div class="edu-icon"><i class="fas fa-university"></i></div>
+            <div class="edu-body">
+              <h3>Bachelor of Engineering (B.E. / B.Tech.)</h3>
+              <p class="edu-institution">Dr. Babasaheb Ambedkar Technological University</p>
+              <p>Focused on systems programming, operating systems architecture, advanced data structures, database management systems, and concurrent software engineering</p>
+              <div class="edu-details">
+                <span>Major</span> Computer Science & Engineering
+              </div>
+            </div>
+          </div>
+          <div class="edu-timeline">
+            <div><i class="fas fa-calendar-alt"></i> 2011 – 2015 </div>
+          </div>
+        </div>
+
       </div>
-      <ul class="job-details">
-        <li>Developed and released an <b>Android application</b> using <b>Java</b> and <b>SQL</b>, serving <b>2000+</b> active users.</li>
-        <li>Automated an enterprise <b>email response system</b> using <b>Java & Spring Boot</b>, improving collaboration for <b>2000+</b> users.</li>
-      </ul>
-    </div>
+    </section>
 
-  </div>
-</section>
-
-
+    <!-- TAB 4: COMPUTATIONAL OPTIMIZATION -->
     <section id="achievements" class="section">
-  <h2 class="section-title">Achievements & Awards</h2>
-  <p class="section-subtitle">Recognition for excellence in engineering and competitive programming</p>
-
-  <div class="achievements-grid">
-    <div class="achievement-card">
-      <div class="card-icon">🏆</div>
-      <div class="card-content">
-        <h3>Code Gladiator Finalist</h3>
-        <span class="year">2019, 2024</span> <span class="tag professional">Competitive</span>
-        <p>Finalist and Semifinalist among 50,000+ participants, demonstrating elite DS & Algorithm skills.</p>
+      <div class="section-header">
+        <h2 class="section-title">Algorithmic Optimizations & Competitions</h2>
+        <p class="section-subtitle">Elite mathematical placements, nation-wide challenges, and performance indicators.</p>
       </div>
-    </div>
 
-    <div class="achievement-card">
-      <div class="card-icon">🎓</div>
-      <div class="card-content">
-        <h3>GATE 2016 Excellence</h3>
-        <span class="year">2016</span> <span class="tag academic">Academic</span>
-        <p>Secured 96.7 percentile among 108,495 candidates, demonstrating exceptional analytical excellence.</p>
-      </div>
-    </div>
+      <div class="achievements-grid">
+        
+        <div class="achieve-card">
+          <div class="achieve-icon"><i class="fas fa-terminal"></i></div>
+          <div class="achieve-body">
+            <h3>Google Code Jam Semifinalist</h3>
+            <div class="achieve-tags">
+              <span class="mini-tag red">Global Tier</span>
+              <span class="mini-tag green">62,000+ Competitors</span>
+            </div>
+            <p>Advanced to the advanced optimization tiers within Google's premier competitive global engineering cohort, executing low-latency runtime computation strategies under tight execution blocks.</p>
+          </div>
+        </div>
 
-    <div class="achievement-card">
-      <div class="card-icon">🏅</div>
-      <div class="card-content">
-        <h3>Google Code Jam Semifinalist</h3>
-        <span class="year">Global</span> <span class="tag competitive">Competitive</span>
-        <p>Ranked among the top performers globally out of 62,000+ participants.</p>
-      </div>
-    </div>
+        <div class="achieve-card">
+          <div class="achieve-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="achieve-body">
+            <h3>Top Platform Rankings</h3>
+            <div class="achieve-tags">
+              <span class="mini-tag red">Elite Placement</span>
+            </div>
+            <p>Maintained verified performance metrics among premier global coding frameworks: <b>HackerRank (Top 1%)</b>, <b>HackerEarth (Top 2%)</b>, and <b>LeetCode (Top 5%)</b>.</p>
+          </div>
+        </div>
 
-    <div class="achievement-card">
-      <div class="card-icon">📈</div>
-      <div class="card-content">
-        <h3>Global Platform Rankings</h3>
-        <span class="year">Ongoing</span> <span class="tag competitive">Competitive</span>
-        <p>
-          <a href="https://leetcode.com/u/cadhage44/" target="_blank">LeetCode (Top 5%)</a>, 
-          <a href="https://www.hackerrank.com/profile/cadhage44" target="_blank">HackerRank (Top 1%)</a>, 
-          and HackerEarth (Top 2%).
-        </p>
-      </div>
-    </div>
+        <div class="achieve-card">
+          <div class="achieve-icon"><i class="fas fa-trophy"></i></div>
+          <div class="achieve-body">
+            <h3>Code Gladiators National Finalist</h3>
+            <div class="achieve-tags">
+              <span class="mini-tag red">Ranked Finalist</span>
+              <span class="mini-tag green">50,000+ Entrants</span>
+            </div>
+            <p>Demonstrated accelerated data structure implementation strategies and complex logical parsing models to capture elite national status loops.</p>
+          </div>
+        </div>
 
-    <div class="achievement-card">
-      <div class="card-icon">💻</div>
-      <div class="card-content">
-        <h3>National Hackathons</h3>
-        <span class="year">Multiple</span> <span class="tag professional">Hackathons</span>
-        <p>Participant in high-stakes events including Honeywell CODE2HON, Axis AI, and TomTom Hack.</p>
+        <div class="achieve-card">
+          <div class="achieve-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="achieve-body">
+            <h3>GATE Nationwide Elite Rank</h3>
+            <div class="achieve-tags">
+              <span class="mini-tag red">96.7 Percentile</span>
+              <span class="mini-tag green">108,000+ Candidates</span>
+            </div>
+            <p>Secured an elite positioning tracking score across nationwide engineering conceptual evaluations, affirming mastery over advanced algorithmic theory primitives.</p>
+          </div>
+        </div>
+
       </div>
-    </div>
-  </div>
-  
-</section>
+    </section>
 
   </main>
 </div>
 
 <script>
-function openTab(id, el) {
+function switchConsole(sectionId, tabElement) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById(id).classList.add('active');
+  
+  tabElement.classList.add('active');
+  document.getElementById(sectionId).classList.add('active');
 }
 
-const PDF_URL = `${window.location.origin}/Chandrashekhar_Adhage.pdf`;
+const RESUME_PDF_PATH = `${window.location.origin}/Chandrashekhar_Adhage.pdf`;
 
 function downloadPDF() {
-  const a = document.createElement("a");
-  a.href = PDF_URL;
-  a.download = "Chandrashekhar_Adhage.pdf";
-  a.click();
-}
-
-function copyPDF() {
-  navigator.clipboard.writeText(PDF_URL)
-    .then(() => alert("Resume PDF link copied"));
+  const link = document.createElement("a");
+  link.href = RESUME_PDF_PATH;
+  link.download = "Chandrashekhar_Adhage.pdf";
+  link.click();
 }
 </script>
 
