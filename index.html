@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Chandrashekhar Adhage | Staff Systems Engineer</title>
+<title>Chandrashekhar Adhage | Staff Software Engineer</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
@@ -581,31 +581,22 @@ body {
     </div>
 
     <h1>Chandrashekhar Adhage</h1>
-    <p class="job-title">Staff Systems Engineer</p>
+    <p class="job-title">Staff Software Engineer</p>
 
     <p class="summary">
       Staff-level Software Engineer specializing in low-latency infrastructure execution, real-time distributed processing streams, and scalable microservice layers. Proven track record managing cloud migrations and system availability metrics across complex multi-tenant enterprise domains.
     </p>
 
-    <div class="info">
-      <div class="info-item">
-        <i class="fas fa-envelope"></i>
-        <span>cadhage44@gmail.com</span>
-      </div>
-      <div class="info-item">
-        <i class="fas fa-phone"></i>
-        <span>+91 9975015476</span>
-      </div>
-      <div class="info-item">
-        <i class="fas fa-map-marker-alt"></i>
-        <span>Mumbai, India</span>
-      </div>
-    </div>
-
     <div class="social-links">
       <a href="https://linkedin.com/in/cadhage" target="_blank" class="social-btn" aria-label="LinkedIn">
         <i class="fab fa-linkedin-in"></i>
       </a>
+      <span onclick="triggerSecureEmail(event)" onmouseover="revealInfo(this, 'email')" class="social-btn" aria-label="Email" style="cursor: pointer;">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <span onclick="openAccessModal(event)" onmouseover="revealInfo(this, 'address')" class="social-btn" aria-label="Address" style="cursor: pointer;">
+        <i class="fas fa-map-marker-alt"></i>
+      </span>
       <a href="https://github.com/cadhage" target="_blank" class="social-btn" aria-label="GitHub">
         <i class="fab fa-github"></i>
       </a>
@@ -631,7 +622,8 @@ body {
       <div class="resume-actions">
         <div class="section-header">
           <h2 class="section-title">Technical Architecture Blueprint</h2>
-		  <p class="section-subtitle">Verified production snapshot of engineering execution, system architectures, and core competencies.</p>        </div>
+          <p class="section-subtitle">Verified production snapshot of engineering execution, system architectures, and core competencies.</p>
+        </div>
         <div class="action-buttons">
           <button class="action-btn" onclick="downloadPDF()"><i class="fas fa-download"></i> Fetch Document</button>
         </div>
@@ -643,7 +635,7 @@ body {
         </div>
       </div>
     </section>
-	
+  
     <!-- TAB 2: SYSTEM EXPERIENCES -->
     <section id="experience" class="section">
       <div class="section-header">
@@ -869,13 +861,39 @@ function switchConsole(sectionId, tabElement) {
   document.getElementById(sectionId).classList.add('active');
 }
 
-const RESUME_PDF_PATH = `${window.location.origin}/Chandrashekhar_Adhage.pdf`;
+// Relative path configuration fixes hosting/routing problems on environments like GitHub Pages
+const RESUME_PDF_PATH = "./Chandrashekhar_Adhage.pdf";
 
 function downloadPDF() {
   const link = document.createElement("a");
   link.href = RESUME_PDF_PATH;
   link.download = "Chandrashekhar_Adhage.pdf";
   link.click();
+}
+
+function triggerSecureEmail(e) {
+  e.preventDefault();
+  const user = "cadhage44";
+  const domain = "gmail.com";
+  window.location.href = `mailto:${user}@${domain}?subject=Engineering%20Profile%20Inquiry`;
+}
+
+function openAccessModal(e) {
+  if (e) e.preventDefault();
+  // Safe default action handler to avoid JS uncaught reference errors
+  console.log("Access modal action triggered.");
+  alert("Address requested: Mumbai, India");
+}
+
+function revealInfo(element, type) {
+  // Only injects the string on hover to mitigate static bot scraping
+  if (type === 'email') {
+    const user = "cadhage44";
+    const domain = "gmail.com";
+    element.title = `${user}@${domain}`;
+  } else if (type === 'address') {
+    element.title = "Mumbai, India";
+  }
 }
 </script>
 
